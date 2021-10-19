@@ -1,0 +1,133 @@
+서버 스타트  yarn run backend
+클라이언트 스타트 yarn start
+
+
+
+리엑트 Js (라이브러리) , Vue (프레임워크)
+
+
+Webpack, Babel
+
+webpack : 많은 모듈을 합하여 간단하게 만들어주는 역할
+Babel : 최신 자바스크립트 문법을 지원하지 않는 브라우저들을 위해서 최신 자바스크립트 문법을 구형 브라우저에서도 돌수있게 변환 시켜줌
+
+
+
+
+====================
+Boiler Plate 에 특성화된 구조 
+_actions
+_reducers     -> Redux를 위한 폴더들
+
+components/view/  -> 이 안에 Page들이 들어감
+
+components/view/Sections  -> 이 안에는 해당 페이지에 관련된 css파일이나, components 들을 넣는다.
+
+App.js   -> Routing 관련 일을 처리
+Config.js  -> 환경 변수를 설정
+
+hoc -> Higher Order Component의 약자로 여러군데에서 쓰일수 있는 것들을 이곳에 넣어둬서 어디서든 쓸수 있게 해줌
+utils  -> 어디서든 나누어 쓸수잇는 곳
+
+Auth(HOC) 여기서 해당 유저가 페이지에 들어갈수 있는 자격이 있는지(로그인여부, 권한 등) 알아 낸 후 충족하면
+Admin component에 가게 해주고 아니라면 다른페이지로 보냄
+
+react router dom 다운
+yarn add react-router-dom --save
+
+axios 다운
+yarn add axios --save
+
+
+Server localhost:5000, client localhost:3000
+이렇게 두개의 다른 포트를 가지고 있는 서버는 아무 설정 없이 Request를 보낼 수 없다.
+WHY??
+Cors 정책 때문에
+
+Cross-Origin Resource Sharing (CORS) 보안을 위해서
+-> Proxy 사용 하는 방법으로 해결
+
+https://create-react-app.dev/docs/proxying-api-requests-in-development [참조]
+
+setupProxy.js 생성
+
+Proxy Server : 
+1. 방화벽 기능
+2. 웹 필터 기능
+3. 캐쉬 데이터 제공 기능
+
+사용 이유!
+1. 회사나 가정에서 인터넷 사용 제어
+2. 캐쉬를 이용해 더 빠른 인터넷 이용 제공
+3. 더 나은 보안 제공
+4. 이용 제한된 사이트 접근
+
+
+#Concurrently를 이용해서 프론트,백 서버 한번에 켜기
+사용법 Usage
+yarn add concurrently
+
+ // "dev": "concurrently \"nodemon server/index.js\" \"yarn run start --prefix client\""
+
+
+CSS FREAMEWORK  [ant.design] 사용
+
+yarn add antd
+
+import { DatePicker } from 'antd';
+
+ReactDOM.render(<DatePicker />, mountNode);
+
+
+#리덕스란?
+자바스크립트 상태관리 라이브러리
+리덕스에는.. Props / State
+
+컴퍼넌트간에 참조시 props를 이용, 부모 컴퍼넌트에서 자식 컴퍼넌트로 가능
+(자식컴퍼넌트로 데이터는 내려줌)
+
+State : 컴퍼넌트 내부에서 데이터가 변하는 경우
+
+Redux 데이터 Flow
+React Component에서 dispatch(action)을 하면 action -> reducer -> store로 각각 이동한 후 다시 react componet로
+한 방향으로만 흐름
+
+Action 
+- 객체형식으로 어떤 액션이 일어났는지 체크, 액션이 일어난 상태
+
+Reducer
+- 액션을 수행함으로 써 변화된 값을 설명, 액션 오브젝트를 받은 후 변화된 값을 설명
+이전 State과 action object를 받은 후에 next state를 return 한다
+(previousState, action) => nextState
+
+Store
+자체 application의 state를 감싸주는 역할, 모든 state를 관리 , 메서드를 이용해 state를 관리
+
+setting up Redux
+1. redux 2. react-redux 3.redux-promise 4.redux-thunk (리덕스 미들웨어)
+
+
+redux-promise ,redux-thunk (미들웨어): 
+store안의 state을 변경하려면 dispatch(action)을 이용해서만 변경가능, 
+이때 리덕스는 객체 형식의 action만 받는데, 
+function이나 promise 형태가 전달되면
+function 형태는 redux-thunk가 dispatch에게 어떻게 받아야 하는지 전달하고,
+promise 형태는 redux-promise가 dispatch에게 전달
+
+
+===========================================
+Authentication 사용자 인증
+
+Auth(HOC) 이곳에서 해당 유저가 요청된 페이지에 들어갈 자격이 되는지 확인 후 자격이 된다면
+Admin component에 가게 해주고 아니라면 다른 페이지로 이동하게 한다 
+
+ex) 이미 로그인이 된 사용자가 로그인 페이지를 접근하면 auth에서 확인 후 다른 페이지로 이동
+
+
+
+
+
+
+
+
+
